@@ -10,6 +10,6 @@ namespace Sodex_API.Models
         public long Amount { get; set; }
         public String Sender { get; set; }
         public String Receiver { get; set; }
-        public String senderPrivateKey { get; set; }
+        public String SenderPrivateKey { get; set; }
     }
 }

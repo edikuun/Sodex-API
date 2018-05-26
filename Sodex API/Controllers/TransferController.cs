@@ -17,7 +17,7 @@ namespace Sodex_API.Controllers
         [HttpPost, Route("Send")]
         public String Transaction(Models.DataModel data)
         {
-            var message = " ";
+            String message = " ";
             List<CSharp2nem.Model.Transfer.Mosaics.Mosaic> MosaicList = new List<CSharp2nem.Model.Transfer.Mosaics.Mosaic>();
             var connection = new Connection();
             connection.SetTestnet();
@@ -30,13 +30,13 @@ namespace Sodex_API.Controllers
             {
                 if (mosaic.MosaicId.Name != "xem")
                 {
-                    MosaicList.Add(new CSharp2nem.Model.Transfer.Mosaics.Mosaic(mosaic.MosaicId.NamespaceId, mosaic.MosaicId.Name, data.Amount));
+                    MosaicList.Add(new CSharp2nem.Model.Transfer.Mosaics.Mosaic(mosaic.MosaicId.NamespaceId, mosaic.MosaicId.Name, (data.Amount * 10000)));
                 }
 
             }
 
             var accountFactory = new PrivateKeyAccountClientFactory(connection);
-            var accClient = accountFactory.FromPrivateKey(data.senderPrivateKey);
+            var accClient = accountFactory.FromPrivateKey(data.SenderPrivateKey);
 
             var transData = new TransferTransactionData()
             {
